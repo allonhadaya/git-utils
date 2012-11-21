@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd ${1-'.'}
+
+for file in *
+do
+  if [ -d $file ]
+  then
+    cd $file
+    if [ -d '.git' ]
+    then
+      echo ${3-''} `pwd` `git branch 2>/dev/null | grep -e '^*' | sed -E 's/^\* (.+)$/(\1) /'`
+      source $2
+    fi
+    cd ../
+  fi
+done
+

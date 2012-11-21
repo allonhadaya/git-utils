@@ -1,0 +1,3 @@
+git status
+read -p "..."
+echo ''
