@@ -1,1 +1,1 @@
-git pull --all
+git pull origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
