@@ -1,6 +1,6 @@
 **Installation**
 
-    git clone git://github.com/allonhadaya/git-utils.git /opt/git-utils && cd git-utils && ./install && . ~/.bashrc
+    git clone git://github.com/allonhadaya/git-utils.git && cd git-utils && ./install && . ~/.bashrc
 
 **Usage**
 
