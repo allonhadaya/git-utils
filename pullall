@@ -1,3 +1,0 @@
-#! /bin/bash
-
-/opt/git-utils/gitall ${1-'.'} '/opt/git-utils/pullall_script' 'Pulling'

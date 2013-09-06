@@ -1,0 +1,8 @@
+#!/bin/bash
+
+./generate
+
+P="`./pathToBin`"
+if [[ ":$PATH:" != *":$P:"* ]]; then
+  echo 'export PATH=$PATH:'"$P" >> ~/.bashrc
+fi
