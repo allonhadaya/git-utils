@@ -1,3 +1,5 @@
+-- defines a variadic version of unlines
+
 {-# LANGUAGE FlexibleInstances #-}
 
 module Unlinesv(
