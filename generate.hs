@@ -48,12 +48,11 @@ script message command pause = unlinesv
   "      cd ${1-'.'}"
   "      for entry in *; do"
   "        run_command $PWD'/'$entry"
- ("        " ++ p)
+ ("        " ++ if pause then "read-p '...'; echo ''" else "# no pause")
   "      done"
   "      exit 0"
   "      ;;"
   "  esac"
   "done"
   ""
-  "run_command ${1-'.'}" where
-  p = if pause then "read-p '...'; echo ''" else "# no pause"
+  "run_command ${1-'.'}" 
