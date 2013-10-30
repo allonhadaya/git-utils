@@ -5,7 +5,7 @@
 
 **Usage**
 
-    pullall [dir]
-    statall [dir]
-    pruneall [dir]
-    branchall [dir]
+    pull [-a] [dir]
+    stat [-a] [dir]
+    prune [-a] [dir]
+    branch [-a] [dir]
