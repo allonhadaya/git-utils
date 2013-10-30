@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 run_command() {
   if [ -d $1 ]
@@ -6,9 +6,9 @@ run_command() {
     cd $1
     if [ -d '.git' ]
     then
-      M='Pruning' 
-      echo ${M-''} `pwd` `git branch 2>/dev/null | grep -e '^*' | sed -E 's/^\* (.+)$/(\1) /'` 
-      git fetch && git branch --merged | grep -v '\*' | xargs -n 1 git branch -d 
+      M='Pruning'
+      echo ${M-''} `pwd` `git branch 2>/dev/null | grep -e '^*' | sed -E 's/^\* (.+)$/(\1) /'`
+      git fetch && git branch --merged | grep -v '\*' | xargs -n 1 git branch -d
     fi
     cd - 1>/dev/null
   fi
@@ -19,8 +19,9 @@ while getopts ':a' opt; do
     a)
       shift
       cd ${1-'.'}
-      for entry in *; do 
+      for entry in *; do
         run_command $PWD'/'$entry
+        # no pause
       done
       exit 0
       ;;
