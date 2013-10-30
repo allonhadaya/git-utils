@@ -1,0 +1,30 @@
+#!/bin/bash 
+
+run_command() {
+  if [ -d $1 ]
+  then
+    cd $1
+    if [ -d '.git' ]
+    then
+      M='Pulling' 
+      echo ${M-''} `pwd` `git branch 2>/dev/null | grep -e '^*' | sed -E 's/^\* (.+)$/(\1) /'` 
+      git fetch && git pull origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD) 
+    fi
+    cd - 1>/dev/null
+  fi
+}
+
+while getopts ':a' opt; do
+  case $opt in
+    a)
+      shift
+      cd ${1-'.'}
+      for entry in *; do 
+        run_command $PWD'/'$entry
+      done
+      exit 0
+      ;;
+  esac
+done
+
+run_command ${1-'.'}
