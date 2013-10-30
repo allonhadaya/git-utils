@@ -24,7 +24,7 @@ writeScript (name, message, command, pause) = do
   setPermissions path (p {executable = True})
 
 script :: String -> String -> Bool -> String
-script message command pause =  unlinesv
+script message command pause = unlinesv
   "#!/bin/bash"
   ""
   "run_command() {"
@@ -48,17 +48,13 @@ script message command pause =  unlinesv
   "      cd ${1-'.'}"
   "      for entry in *; do"
   "        run_command $PWD'/'$entry"
-  (pauseScript pause)
+ ("        " ++ pauseScript pause)
   "      done"
   "      exit 0"
   "      ;;"
   "  esac"
   "done"
   ""
-  "run_command ${1-'.'}"
-
-pauseScript :: Bool -> String
-pauseScript True  =
-  "        read-p '...'; echo ''"
-pauseScript False =
-  "        # no pause"
+  "run_command ${1-'.'}" where
+  pauseScript True  = "read-p '...'; echo ''"
+  pauseScript False = "# no pause"
