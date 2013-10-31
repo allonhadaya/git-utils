@@ -6,10 +6,10 @@ import Unlinesv
 
 scripts :: [(FilePath, String, String, Bool)]
 scripts = [
-          ("pull", "Pulling", "git fetch && git pull origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)", False),
-          ("stat", "Status", "git status", True),
-          ("branch", "Branches", "git branch", True),
-          ("prune", "Pruning", "git fetch && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d", False)
+          ("gpull", "Pulling", "git fetch && git pull origin $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)", False),
+          ("gstat", "Status", "git status", True),
+          ("gbranch", "Branches", "git branch", True),
+          ("gprune", "Pruning", "git fetch && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d", False)
           ]
 
 main = do
