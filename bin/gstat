@@ -21,7 +21,7 @@ while getopts ':a' opt; do
       cd ${1-'.'}
       for entry in *; do
         run_command $PWD'/'$entry
-        read-p '...'; echo ''
+        read -p '...'; echo ''
       done
       exit 0
       ;;
