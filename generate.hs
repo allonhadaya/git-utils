@@ -28,16 +28,20 @@ script message command pause = unlinesv
   "#!/bin/bash"
   ""
   "run_command() {"
-  "  if [ -d $1 ]"
+  "  if test -d $1 && cd $1"
   "  then"
-  "    cd $1"
   "    if [ -d '.git' ]"
   "    then"
  ("      M='" ++ message ++ "'")
   "      echo ${M-''} `pwd` `git branch 2>/dev/null | grep -e '^*' | sed -E 's/^\\* (.+)$/(\\1) /'`"
  ("      " ++ command)
+  "      cd - 1>/dev/null"
+  "    else"
+  "      cd - 1>/dev/null"
+  "      false"
   "    fi"
-  "    cd - 1>/dev/null"
+  "  else"
+  "    false"
   "  fi"
   "}"
   ""
@@ -47,8 +51,7 @@ script message command pause = unlinesv
   "      shift"
   "      cd ${1-'.'}"
   "      for entry in *; do"
-  "        run_command $PWD'/'$entry"
- ("        " ++ if pause then "read -p '...'; echo ''" else "# no pause")
+ ("        run_command $PWD'/'$entry " ++ if pause then "&& read -p '...' && echo ''" else "# no pause")
   "      done"
   "      exit 0"
   "      ;;"

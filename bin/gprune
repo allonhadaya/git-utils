@@ -1,16 +1,20 @@
 #!/bin/bash
 
 run_command() {
-  if [ -d $1 ]
+  if test -d $1 && cd $1
   then
-    cd $1
     if [ -d '.git' ]
     then
       M='Pruning'
       echo ${M-''} `pwd` `git branch 2>/dev/null | grep -e '^*' | sed -E 's/^\* (.+)$/(\1) /'`
       git fetch && git branch --merged | grep -v '\*' | xargs -n 1 git branch -d
+      cd - 1>/dev/null
+    else
+      cd - 1>/dev/null
+      false
     fi
-    cd - 1>/dev/null
+  else
+    false
   fi
 }
 
@@ -20,8 +24,7 @@ while getopts ':a' opt; do
       shift
       cd ${1-'.'}
       for entry in *; do
-        run_command $PWD'/'$entry
-        # no pause
+        run_command $PWD'/'$entry # no pause
       done
       exit 0
       ;;
