@@ -1,0 +1,54 @@
+#!/bin/bash
+
+run_command() {
+  if test -d $1 && cd $1
+  then
+    if [ -d '.git' ]
+    then
+      M='Pruning'
+      echo ${M-''} `pwd` `git branch 2>/dev/null | grep -e '^*' | sed -E 's/^\* (.+)$/(\1) /'`
+      git fetch && git branch --merged | grep -v '\*' | xargs -n 1 git branch -d
+      cd - 1>/dev/null
+    else
+      cd - 1>/dev/null
+      false
+    fi
+  else
+    false
+  fi
+}
+
+ALL=false
+DIR='.'
+
+for i in "$@"
+do
+case $i in
+  -a|--all)
+    ALL=true
+    ;;
+  -h|--help)
+    echo 'Deletes the local branches that have been merged.'
+    exit 0
+    ;;
+  *)
+    if [ -d $i ]
+    then
+      DIR=$i
+    else
+      echo "unknown directory: $i" 1>&2
+      exit 1
+    fi
+    ;;
+esac
+done
+
+if $ALL
+then
+  cd $DIR
+  for ENTRY in *; do
+    run_command $PWD'/'$ENTRY # no pause
+  done
+else
+  run_command $DIR
+fi
