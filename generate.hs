@@ -30,14 +30,14 @@ scripts = [
           },
           Script {
             help  = "Prints local branches.",
-            name  = "br",
+            name  = "branch",
             label = "Branches",
             body  = "git branch",
             pause = True
           },
           Script {
             help  = "Deletes the local branches that have been merged.",
-            name  = "pr",
+            name  = "prune",
             label = "Pruning",
             body  = "git fetch && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d",
             pause = False
