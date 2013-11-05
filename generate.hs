@@ -41,6 +41,13 @@ scripts = [
             label = "Pruning",
             body  = "git fetch && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d",
             pause = False
+          },
+          Script {
+            help  = "Simply prints the path and branch.",
+            name  = "gls",
+            label = ">",
+            body  = "",
+            pause = True
           }
           ]
 
